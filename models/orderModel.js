@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
     phone_No: {
-      type: String,
+      type: Number,
       required: true,
     },
   },
@@ -118,7 +118,7 @@ const orderSchema = new mongoose.Schema({
 
   createdAt: {
     type: Date,
-    default: Date.now,  
+    default: Date.now,
   },
 });
 

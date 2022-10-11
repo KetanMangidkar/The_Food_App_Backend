@@ -36,8 +36,10 @@ connectPasport();
 
 //Import routes
 import userRoute from "./routes/userRoutes.js";
+import orderRoute from "./routes/orderRoutes.js";
 
 app.use("/api/foodapp", userRoute);
+app.use("/api/foodapp", orderRoute);
 
 //error middleware used
 app.use(miderror);

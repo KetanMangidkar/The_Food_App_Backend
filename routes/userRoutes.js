@@ -1,13 +1,20 @@
 import express from "express";
 import passport from "passport";
-import { logout, userProfile } from "../controllers/userController.js";
-import { isAuthenticated } from "../middlewares/authentication.js";
+import {
+  getAllUsers,
+  logout,
+  userProfile,
+} from "../controllers/userController.js";
+import {
+  authorisedAdmin,
+  isAuthenticated,
+} from "../middlewares/authentication.js";
 
 //create routes
 const router = express.Router();
 
 router.get(
-  "/authorisedlogin",
+  "/logingoogle",
   passport.authenticate("google", {
     scope: ["profile"],
   })
@@ -25,8 +32,11 @@ router.get(
   }
 );
 
-router.get("/userprofile",isAuthenticated, userProfile);
+router.get("/userprofile", isAuthenticated, userProfile);
 
 router.get("/logout", logout);
+
+//Admin Routes
+router.get("/admin/users", isAuthenticated, authorisedAdmin, getAllUsers);
 
 export default router;

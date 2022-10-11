@@ -6,3 +6,8 @@ export const miderror = (err, req, res, next) => {
     message: err.message,
   });
 };
+
+//replcement for try-catch block
+export const catchAsyncError = (passedFunction) => (req, res, next) => {
+  Promise.resolve(passedFunction(req, res, next)).catch(next);
+};
