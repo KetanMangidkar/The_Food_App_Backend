@@ -5,6 +5,7 @@ import session from "express-session";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import { miderror } from "./middlewares/miderror.js";
+import cors from "cors";
 
 const app = express();
 export default app;
@@ -18,6 +19,12 @@ app.use(
     secret: process.env.SECREATE_SESSION_KEY,
     resave: false,
     saveUninitialized: false,
+
+    cookie: {
+      secure: true,
+      httponly: true,
+      sameSite: "none",
+    },
   })
 );
 app.use(cookieParser());
@@ -28,9 +35,18 @@ app.use(
   })
 );
 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URI,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.enable("trust proxy");
 
 connectPasport();
 

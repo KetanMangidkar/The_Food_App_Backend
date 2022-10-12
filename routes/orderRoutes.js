@@ -3,7 +3,9 @@ import {
   getAdminOrders,
   getMyOrders,
   getOrderDetails,
+  paymentVerification,
   placedOrder,
+  placedOrderonline,
   processOrders,
 } from "../controllers/orderController.js";
 import {
@@ -13,7 +15,9 @@ import {
 
 const router = express.Router();
 
-router.post("/placedorder", placedOrder);
+router.post("/codorder",isAuthenticated, placedOrder);
+router.post("/onlineorder",isAuthenticated, placedOrderonline);
+router.post("/paymentverification",isAuthenticated, paymentVerification);
 router.get("/myorders", isAuthenticated, getMyOrders);
 router.get("/order/:id", isAuthenticated, getOrderDetails);
 

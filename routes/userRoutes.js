@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import {
+  getAllStatistics,
   getAllUsers,
   logout,
   userProfile,
@@ -22,21 +23,21 @@ router.get(
 
 router.get(
   "/login",
-  passport.authenticate("google"),
-  //  {
-  //   scope: ["profile"],
-  //   successRedirect: process.env.FRONTEND_URI,
-  // })
-  (req, res, next) => {
-    res.send("Logged In");
-  }
+  passport.authenticate("google", {
+    successRedirect: process.env.FRONTEND_URI,
+  })
 );
 
 router.get("/userprofile", isAuthenticated, userProfile);
-
 router.get("/logout", logout);
 
 //Admin Routes
 router.get("/admin/users", isAuthenticated, authorisedAdmin, getAllUsers);
 
+router.get(
+  "/admin/statistics",
+  isAuthenticated,
+  authorisedAdmin,
+  getAllStatistics
+);
 export default router;
