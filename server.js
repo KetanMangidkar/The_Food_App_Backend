@@ -15,6 +15,6 @@ app.get("/", (req, res, next) => {
 
 app.listen(process.env.PORT, () =>
   console.log(
-    `Server running sucessfully on PORT: ${process.env.PORT}`
+    `Server running sucessfully on PORT: ${process.env.PORT}, in ${process.env.NODE_ENV} MODE`
   )
 );

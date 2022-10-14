@@ -21,9 +21,9 @@ app.use(
     saveUninitialized: false,
 
     cookie: {
-      secure: true,
-      httponly: true,
-      sameSite: "none",
+      secure: process.env.NODE_ENV === "development" ? false : true,
+      httponly: process.env.NODE_ENV === "development" ? false : true,
+      sameSite: process.env.NODE_ENV === "development" ? false : "none",
     },
   })
 );

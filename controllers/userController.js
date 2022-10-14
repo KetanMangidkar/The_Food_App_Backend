@@ -14,7 +14,11 @@ export const logout = (req, res, next) => {
     if (err) {
       return next(err);
     } else {
-      res.clearCookie("connect.sid"); //default name of the cookie
+      res.clearCookie("connect.sid", {
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        httpOnly: process.env.NODE_ENV === "development" ? false : true,
+        sameSite: process.env.NODE_ENV === "development" ? false : "none",
+      }); //default name of the cookie
       res.status(200).json({
         message: "Logged Out",
       });
