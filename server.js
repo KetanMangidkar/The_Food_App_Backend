@@ -1,20 +1,20 @@
-import app from "./index.js";
-import { connect } from "./config/db.js";
+import app from "./app.js";
+import { connectDB } from "./config/database.js";
 import Razorpay from "razorpay";
-
-connect();
+connectDB();
 
 export const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
-  key_secret: process.env.RAZORPAY_API_SECRET_KEY,
+  key_secret: process.env.RAZORPAY_API_SECRET,
 });
 
 app.get("/", (req, res, next) => {
-  res.send("<h1>Working<h1/>");
+  res.send("<h1>Working</h1>");
 });
 
 app.listen(process.env.PORT, () =>
   console.log(
-    `Server running sucessfully on PORT: ${process.env.PORT}, in ${process.env.NODE_ENV} MODE`
+    `Server is working on PORT: ${process.env.PORT}`
+    // `Server is working on PORT: ${process.env.PORT}`
   )
 );
