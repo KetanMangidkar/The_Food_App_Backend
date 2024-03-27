@@ -21,9 +21,9 @@ app.use(
     saveUninitialized: false,
 
     cookie: {
-      //       secure: process.env.NODE_ENV === "development" ? false : true,
-      //       httpOnly: process.env.NODE_ENV === "development" ? false : true,
-      //       sameSite: process.env.NODE_ENV === "development" ? false : "none",
+      secure: process.env.NODE_ENV === "development" ? false : true,
+      httpOnly: process.env.NODE_ENV === "development" ? false : true,
+      sameSite: process.env.NODE_ENV === "development" ? false : "none",
       secure: true,
       httpOnly: true,
       sameSite: "none",
@@ -41,7 +41,7 @@ app.use(
 
 app.use(
   cors({
-    credentials: false,
+    credentials: true,
     origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
